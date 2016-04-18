@@ -5,3 +5,5 @@ security:
       client-secret: acmesecret
       scope: read,write
       auto-approve-scopes: '.*'
+
+server.port: 9000
