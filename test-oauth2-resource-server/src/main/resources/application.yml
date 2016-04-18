@@ -1,10 +1,10 @@
 server:
-  port: 8000
+    port: 8000
 
 security:
-  oauth2:
-    client:
-      client-id: sgm
-      client-secret: sgmsecret
-      scope: conf_status_read
-      auto-approve-scopes: '.*'
+    oauth2:
+        client:
+            client-id: sgm
+            client-secret: sgmsecret
+            scope: confstatus_read
+            auto-approve-scopes: '.*'

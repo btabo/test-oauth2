@@ -23,10 +23,10 @@
 -->
 
     <logger name="com.example" level="DEBUG"/>
-    <logger name="org.springframework" level="DEBUG"/>
-    <logger name="org.springframework.web" level="DEBUG"/>
-    <logger name="org.springframework.security" level="DEBUG"/>
-    <logger name="org.springframework.cache" level="DEBUG"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework.security" level="INFO"/>
+    <logger name="org.springframework.cache" level="INFO"/>
 
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
