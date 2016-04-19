@@ -20,23 +20,25 @@ import java.security.KeyPair;
 
 /**
  * Created by btaboule010714 on 18/04/2016.
+ *
+ * This class loads ean embeded OAuth2 server
  */
-@Configuration
-@EnableAuthorizationServer
-public class Oauth2AuthServerConfig extends AuthorizationServerConfigurerAdapter implements EnvironmentAware {
+//@Configuration
+//@EnableAuthorizationServer
+public class Oauth2AuthServerConfig {//extends AuthorizationServerConfigurerAdapter implements EnvironmentAware {
 
-    private static final String ENV_OAUTH = "security.oauth2.client.";
+    private static final String ENV_OAUTH = "security.oauth2.token-server.";
     private static final String PROP_CLIENTID = "client-id";
     private static final String PROP_SCOPE = "scope";
     private static final String PROP_SECRET = "client-secret";
     private static final String PROP_TOKEN_VALIDITY_SECONDS = "tokenValidityInSeconds";
 
-    @Autowired
+    //@Autowired
     private AuthenticationManager authenticationManager;
 
     private RelaxedPropertyResolver propertyResolver;
 
-    @Override
+    //@Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
             .withClient(propertyResolver.getProperty(PROP_CLIENTID))
@@ -46,14 +48,14 @@ public class Oauth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
             .accessTokenValiditySeconds(propertyResolver.getProperty(PROP_TOKEN_VALIDITY_SECONDS, Integer.class, 1800));
     }
 
-    @Override
+    //@Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer)
             throws Exception {
         oauthServer.tokenKeyAccess("permitAll()")
                 .checkTokenAccess("permitAll()");
     }
 
-    @Override
+    //@Override
     public void setEnvironment(Environment environment) {
         this.propertyResolver = new RelaxedPropertyResolver(environment, ENV_OAUTH);
     }

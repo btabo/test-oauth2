@@ -1,8 +1,10 @@
 package com.example.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -28,10 +30,11 @@ public class Oauth2Config implements ResourceServerConfigurer {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         //resources.resourceId(SERVER_RESOURCE_ID);
-//        RemoteTokenServices rts = new RemoteTokenServices();
-//        rts.setCheckTokenEndpointUrl("localhost:9999/oauth/check_token");
-//
-//        resources.tokenServices(rts);
+        MyRemoteTokenServices rts = new MyRemoteTokenServices();
+        rts.setCheckTokenEndpointUrl("http://localhost:9999/uaa/oauth/check_token");
+
+        resources.tokenServices(rts);
+
     }
 
     @Override
@@ -39,10 +42,10 @@ public class Oauth2Config implements ResourceServerConfigurer {
         http
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and().requestMatchers()
-                .antMatchers("/hello")
                 .and().authorizeRequests()
-                .antMatchers("/hello").access("#oauth2.hasScope('confstatus_read')")
+                .antMatchers("/api/**").access("#oauth2.hasScope('confstatus_read')")
+                //.antMatchers("/api/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
         ;
     }
 }

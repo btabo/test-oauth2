@@ -1,10 +1,16 @@
-server:
-    port: 8000
+server.port: 8000
 
 security:
     oauth2:
-        client:
-            client-id: sgm
-            client-secret: sgmsecret
-            scope: confstatus_read
-            auto-approve-scopes: '.*'
+        ## To be uncommented if Authorization Server is embeded ###
+        #token-server:
+        #    client-id: sgm
+        #    client-secret: sgmsecret
+        #    scope: confstatus_read
+        #    auto-approve-scopes: '.*'
+        ###########################################################
+
+        ## To be commented when Authorization server runs separately
+        resource:
+            tokenInfoUri: http://localhost:9999/uaa/oauth/check_token
+        #############################################################
