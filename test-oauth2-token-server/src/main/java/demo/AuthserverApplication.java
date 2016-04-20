@@ -86,7 +86,7 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
 					.withClient("sgm")
 					.secret("sgmsecret")
 					.authorizedGrantTypes("client_credentials", "authorization_code", "refresh_token",
-							"password").scopes("confstatus_read");
+							"password").scopes("confstatus_read", "openid");
 		}
 
 		@Override

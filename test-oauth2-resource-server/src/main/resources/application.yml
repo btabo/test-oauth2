@@ -14,3 +14,39 @@ security:
         resource:
             tokenInfoUri: http://localhost:9999/uaa/oauth/check_token
         #############################################################
+
+# Swagger Security Config
+auth:
+  server:
+    endpoints:
+      tokeninfo: http://localhost:9999/uaa/oauth/check_token
+      authorize:
+        url: http://localhost:9999/uaa/oauth/authorize
+        client-id: sgm
+        client-secret: sgmsecret
+        realme: /
+        application-name: sample-swagger
+        api-key: /api/.*
+  service:
+      scope: companies
+      unprotectedpaths:
+        - /v2/api-docs
+        - /configuration/*
+        - /swagger-*
+        - /swagger-ui.html
+        - /webjars/*
+        - /webjars/**/*
+        - /validatorUrl
+
+swagger:
+    enabled: true
+    includePatterns: "^/(?!error|autoconfig|beans|configprops|dump|info|mappings|trace|env|metrics).*$" # All endpoints except auto-generated (by spring boot) error endpoint
+    title: Companies management services
+    description: "test"
+    version: 1.0
+    termOfServiceUrl: API terms of services URL
+    contact: youssef.guenoun-ext@sgcib.com
+    license: API license type
+    licenseUrl: API license URL
+
+

@@ -43,8 +43,8 @@ public class Oauth2Config implements ResourceServerConfigurer {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and().authorizeRequests()
-                .antMatchers("/api/**").access("#oauth2.hasScope('confstatus_read')")
-                //.antMatchers("/api/**").permitAll()
+                //.antMatchers("/api/**").access("#oauth2.hasScope('confstatus_read')")
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
         ;
     }
